@@ -147,8 +147,8 @@ for i, title in enumerate(news_data.TITLE):
 #     processed=True
     
     # Too long of a sentence
-#     if len(title) >= 20:
-#         continue
+    if len(title) >= 20:
+        continue
         
 #     if len(title) not in sent_len_count:
 #         sent_len_count[len(title)] = 0
@@ -160,8 +160,6 @@ for i, title in enumerate(news_data.TITLE):
     sent = []
     for w in title:
         w = w.strip(', .:%\'')
-        if w[-2:] == "'s":
-            w = w[-2:]
 
         try:
             val = float(w)
@@ -169,7 +167,15 @@ for i, title in enumerate(news_data.TITLE):
             continue
         except ValueError:
             pass
-        sent.append(w)
+
+        if w[-2:] == "'s":
+            w = w[-2:]
+        
+            sent.append(w)
+            sent.append("'s")
+        else:
+            sent.append(w)
+
     processed_data.append(sent)
     vocabulary += sent
     
@@ -249,7 +255,44 @@ class Net(nn.Module):
         return F.log_softmax(self.w(self.embedding(x)), dim=0)
 
 
+class Word2VecDataset(torch.utils.data.Dataset):
 
+    def __init__(self, idx_pairs):
+        """
+        Args:
+            csv_file (string): Path to the csv file with annotations.
+            root_dir (string): Directory with all the images.
+            transform (callable, optional): Optional transform to be applied
+                on a sample.
+        """
+        self.data = []
+        i = 0
+        for data, target in idx_pairs:
+            i += 1
+            if i % 100000 == 0:
+                print(i)
+                # break
+#             data = get_input_layer(data)
+            target = torch.from_numpy(np.array([target])).long()
+            self.data.append((data, target))
+
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        # img_name = os.path.join(self.root_dir, self.landmarks_frame.ix[idx, 0])
+        # image = io.imread(img_name)
+        # landmarks = self.landmarks_frame.ix[idx, 1:].as_matrix().astype('float')
+        # landmarks = landmarks.reshape(-1, 2)
+        # sample = {'image': image, 'landmarks': landmarks}
+
+        # if self.transform:
+        #     sample = self.transform(sample)
+        data, target = self.data[idx]
+        return data, target
+
+dataset = Word2VecDataset(idx_pairs)
 
 
 embedding_dims = 300
