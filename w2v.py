@@ -23,7 +23,7 @@ print("Load news data")
 
 # skip_list=['plosser','noyer','bunds','cooperman','urgest','4b',"didn't",'chipotle','djia','5th','direxion']
 skip_list={}
-contractions_dict = { 
+contractions_dict = {
 "ain't":'is not',
 "it'll":"it will",
 "there'll":"there will",
@@ -145,11 +145,11 @@ for i, title in enumerate(news_data.TITLE):
 #     processed_data.append(title)
 #     vocabulary += title
 #     processed=True
-    
+
     # Too long of a sentence
     if len(title) >= 20:
         continue
-        
+
 #     if len(title) not in sent_len_count:
 #         sent_len_count[len(title)] = 0
 
@@ -170,7 +170,7 @@ for i, title in enumerate(news_data.TITLE):
 
         if w[-2:] == "'s":
             w = w[-2:]
-        
+
             sent.append(w)
             sent.append("'s")
         else:
@@ -178,13 +178,13 @@ for i, title in enumerate(news_data.TITLE):
 
     processed_data.append(sent)
     vocabulary += sent
-    
+
 #         if dictionary.get(w) is None:
 #             if w not in skip_list:
 #                 skip_list[w] = 0
 #             skip_list[w] += 1
 #         else:
-        
+
 #             if w not in used_vocab:
 #                 used_vocab[w] = 0
 #             used_vocab[w] += 1
@@ -229,6 +229,7 @@ for sentence in tokenized_corpus:
     i += 1
     if i % 10000 == 0:
         print(i, len(tokenized_corpus))
+        # break
     indices = [word2idx[word] for word in sentence]
     # for each word, threated as center word
     for center_word_pos in range(len(indices)):
@@ -252,7 +253,12 @@ class Net(nn.Module):
         self.embedding = nn.Embedding(vocabulary_size, embedding_dims)
         self.w = nn.Linear(embedding_dims, vocabulary_size, bias=False)
     def forward(self,x):
-        return F.log_softmax(self.w(self.embedding(x)), dim=0)
+        # import pdb; pdb.set_trace()
+        x = x.long()
+        x = self.embedding(x)
+        x = self.w(x)
+        return F.log_softmax(x)
+        # return F.log_softmax(self.w(self.embedding(x)))
 
 
 class Word2VecDataset(torch.utils.data.Dataset):
@@ -273,6 +279,7 @@ class Word2VecDataset(torch.utils.data.Dataset):
                 print(i)
                 # break
 #             data = get_input_layer(data)
+            # data = torch.from_numpy(np.array([data])).long()
             target = torch.from_numpy(np.array([target])).long()
             self.data.append((data, target))
 
@@ -311,10 +318,10 @@ for epo in range(num_epochs):
         optimizer.zero_grad()
         x = Variable(data)
         y_true = Variable(target)
-        
+
 #         z1 = torch.matmul(W1, x)
 #         z2 = torch.matmul(W2, z1)
-    
+
 #         log_softmax = F.log_softmax(z2, dim=0)
         log_softmax = model(x)
 #         print(log_softmax.shape, y_true.shape)
@@ -328,6 +335,5 @@ for epo in range(num_epochs):
 #         W2.grad.data.zero_()
 #         if i % 100 == 0:
         print(i)
-#     if epo % 10 == 0:    
+#     if epo % 10 == 0:
 #         print(f'Loss at epo {epo}: {loss_val/len(idx_pairs)}')
-
