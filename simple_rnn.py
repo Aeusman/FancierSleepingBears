@@ -36,11 +36,12 @@ parser.add_argument('--batch-size', type=int, default=256, metavar='B',
 parser.add_argument('--test-batch-size', type=int, default=256, metavar='TB',
                     help='input batch size for testing (default: 1000)')
 
-parser.add_argument('--embed-size', type=int, default=64, metavar='ES',
+parser.add_argument('--embed-size', type=int, default=32, metavar='ES',
                     help='input batch size for testing (default: 64)')
 parser.add_argument('--hidden-size', type=int, default=64, metavar='HS',
                     help='input batch size for testing (default: 64)')
-
+parser.add_argument('--vocab-size', type=int, default=15000, metavar='VS',
+                    help='input batch size for testing (default: 15000)')
 parser.add_argument('--epochs', type=int, default=10, metavar='E',
                     help='number of epochs to train (default: 10)')
 parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
@@ -71,8 +72,14 @@ parser.add_argument('--log_dir', type=str, default='./data/', metavar='F',
 # parser.add_argument('--name', type=str, default='', metavar='N',
                     # help="""A name for this training run, this
                             # affects the directory so use underscores and not spaces.""")
-parser.add_argument('--model', type=str, default='default', metavar='M',
-                    help="""Options are default, simple_rnn.""")
+parser.add_argument('--model', type=str, default='gru', metavar='M',
+                    help="""Options are default, rnn, lstm, gru, none""")
+parser.add_argument('--num-layers', type=int, default=1, metavar='NL',
+                    help='number of epochs to train (default: 1)')
+parser.add_argument('--bidirectional', type=int, default=0, metavar='B',
+                    help='number of epochs to train (default: 0)')
+parser.add_argument('--use-bias', type=int, default=0, metavar='UB',
+                    help='number of epochs to train (default: 0)')
 # parser.add_argument('--print_log', action='store_true', default=False,
                     # help='prints the csv log when training is complete')
 
@@ -91,13 +98,17 @@ epochs = args.epochs
 learning_rate = args.lr
 model_name = args.model
 optimizer_name = args.optimizer
+num_layers = args.num_layers
+bidirectional = args.bidirectional
+use_bias = args.use_bias
+
 
 random.seed(args.seed)
 torch.manual_seed(args.seed)
 if use_cuda:
     torch.cuda.manual_seed(args.seed)
 
-upper_limit_vocab_size = 1000000
+upper_limit_vocab_size = args.vocab_size
 
 if os.path.exists('news_data.p'):
     print('Load processed data')
@@ -297,7 +308,7 @@ for sentence,label in tokenized_corpus:
     # i += 1
     # if i % 10000 == 0:
         # print(i, len(tokenized_corpus))
-    indices = [word2idx[word] for word in sentence]
+    indices = [word2idx.get(word, word2idx['UNK']) for word in sentence]
     corpus_dataset.append((indices, len(indices),label))
 
 
@@ -338,22 +349,70 @@ class RNNModel(nn.Module):
     def __init__(self):
         super(RNNModel, self).__init__()
         self.embed = nn.Embedding(vocabulary_size,embed_size)
-        self.rnn = nn.RNN(embed_size,hidden_size,1)
-        self.w = nn.Linear(hidden_size,4)
+
+        if model_name == "rnn" or model_name == "default":
+            self.rnn = nn.RNN(embed_size,hidden_size,num_layers, bidirectional=bidirectional)
+        elif model_name == "gru":
+            self.rnn = nn.GRU(embed_size,hidden_size,num_layers, bidirectional=bidirectional)
+        elif model_name == "lstm":
+            self.rnn = nn.LSTM(embed_size,hidden_size,num_layers, bidirectional=bidirectional)
+        elif model_name == "none":
+            self.rnn = None
+        else:
+            raise ValueError('Unknown model type: ' + model_name)
+
+        if model_name == "none":
+            self.w = nn.Linear(embed_size,4)
+        else:
+            self.use_bidirectional = int(bidirectional == True) + 1
+            self.w = nn.Linear(hidden_size * num_layers * self.use_bidirectional,4, bias=use_bias)
+
+        # self.w = nn.Linear(hidden_size,4)
 
     def forward(self,x,lengths):
         x = self.embed(x)
         y = pack_padded_sequence(x, lengths, batch_first=True)
-        _,h = self.rnn(y)
-        h = h.view(-1,hidden_size)
+        if model_name == "none":
+            h,_ = pad_packed_sequence(y, lengths)
+            h = self.w(h)
+            h = h.sum(dim = 1)
+        else:
+            if model_name == "lstm":
+                _,(h,_) = self.rnn(y)
+            else:
+                _,h = self.rnn(y)
+
+            h = h.view(-1,hidden_size * num_layers * self.use_bidirectional)
+            h = self.w(h)
+        # else:
+            # _,h = self.rnn(y)
+            # h = h.view(-1,hidden_size * num_layers * self.use_bidirectional)
+            # h = self.w(h)
         # h = self.w(h)
-        return F.log_softmax(self.w(h), dim=1)
+        # return F.log_softmax(self.w(h), dim=1)
+        return F.log_softmax(h, dim=1)
+    
+# class GRUModel(nn.Module):
+#     def __init__(self):
+#         super(GRUModel, self).__init__()
+#         self.embed = nn.Embedding(vocabulary_size,embed_size)
+#         self.rnn = nn.GRU(embed_size,hidden_size,1)
+#         self.w = nn.Linear(hidden_size,4)
+
+#     def forward(self,x,lengths):
+#         x = self.embed(x)
+#         y = pack_padded_sequence(x, lengths, batch_first=True)
+#         _,h = self.rnn(y)
+#         h = h.view(-1,hidden_size)
+#         # h = self.w(h)
+#         return F.log_softmax(self.w(h), dim=1)
     
 
-if model_name == 'default' or model_name == 'simple_rnn':
-    model = RNNModel()
-else:
-    raise ValueError('Unknown model type: ' + model_name)
+
+# if model_name == 'default' or model_name == 'simple_rnn':
+model = RNNModel()
+# else:
+    # raise ValueError('Unknown model type: ' + model_name)
 
 print(model)
 if use_cuda:
