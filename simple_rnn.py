@@ -80,6 +80,8 @@ parser.add_argument('--bidirectional', type=int, default=0, metavar='B',
                     help='number of epochs to train (default: 0)')
 parser.add_argument('--use-bias', type=int, default=0, metavar='UB',
                     help='number of epochs to train (default: 0)')
+parser.add_argument('--use-rnn-output', type=int, default=1, metavar='RO',
+                    help='number of epochs to train (default: 0)')
 # parser.add_argument('--print_log', action='store_true', default=False,
                     # help='prints the csv log when training is complete')
 
@@ -101,7 +103,7 @@ optimizer_name = args.optimizer
 num_layers = args.num_layers
 bidirectional = args.bidirectional
 use_bias = args.use_bias
-
+use_rnn_output = args.use_rnn_output
 
 random.seed(args.seed)
 torch.manual_seed(args.seed)
@@ -376,6 +378,16 @@ class RNNModel(nn.Module):
             h,_ = pad_packed_sequence(y, lengths)
             h = self.w(h)
             h = h.sum(dim = 1)
+        elif use_rnn_output:
+            # if model_name == "lstm":
+                # _,(h,_) = self.rnn(y)
+            # else:
+            h,_ = self.rnn(y)
+            h,_ = pad_packed_sequence(h, lengths)
+
+            # h = h.view(-1,hidden_size * num_layers * self.use_bidirectional)
+            h = self.w(h)
+            h = h.sum(dim = 1)
         else:
             if model_name == "lstm":
                 _,(h,_) = self.rnn(y)
@@ -384,37 +396,12 @@ class RNNModel(nn.Module):
 
             h = h.view(-1,hidden_size * num_layers * self.use_bidirectional)
             h = self.w(h)
-        # else:
-            # _,h = self.rnn(y)
-            # h = h.view(-1,hidden_size * num_layers * self.use_bidirectional)
-            # h = self.w(h)
-        # h = self.w(h)
-        # return F.log_softmax(self.w(h), dim=1)
+
         return F.log_softmax(h, dim=1)
-    
-# class GRUModel(nn.Module):
-#     def __init__(self):
-#         super(GRUModel, self).__init__()
-#         self.embed = nn.Embedding(vocabulary_size,embed_size)
-#         self.rnn = nn.GRU(embed_size,hidden_size,1)
-#         self.w = nn.Linear(hidden_size,4)
 
-#     def forward(self,x,lengths):
-#         x = self.embed(x)
-#         y = pack_padded_sequence(x, lengths, batch_first=True)
-#         _,h = self.rnn(y)
-#         h = h.view(-1,hidden_size)
-#         # h = self.w(h)
-#         return F.log_softmax(self.w(h), dim=1)
-    
-
-
-# if model_name == 'default' or model_name == 'simple_rnn':
 model = RNNModel()
-# else:
-    # raise ValueError('Unknown model type: ' + model_name)
-
 print(model)
+
 if use_cuda:
     model.cuda()
 
@@ -426,11 +413,6 @@ elif optimizer_name == 'rmsprop':
     optimizer = optim.RMSprop(model.parameters(), lr=args.lr)
 else:
     raise ValueError('Unsupported optimizer: ' + optimizer_name)
-
-
-# return optimizer
-# optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-
 
 def train(tensorboard_writer, callbacklist, total_minibatch_count):
 
