@@ -40,8 +40,8 @@ parser.add_argument('--embed-size', type=int, default=32, metavar='ES',
                     help='input batch size for testing (default: 64)')
 parser.add_argument('--hidden-size', type=int, default=64, metavar='HS',
                     help='input batch size for testing (default: 64)')
-parser.add_argument('--vocab-size', type=int, default=15000, metavar='VS',
-                    help='input batch size for testing (default: 15000)')
+parser.add_argument('--vocab-size', type=int, default=25000, metavar='VS',
+                    help='input batch size for testing (default: 25000)')
 parser.add_argument('--epochs', type=int, default=10, metavar='E',
                     help='number of epochs to train (default: 10)')
 parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
@@ -75,7 +75,7 @@ parser.add_argument('--log_dir', type=str, default='./data/', metavar='F',
 parser.add_argument('--model', type=str, default='gru', metavar='M',
                     help="""Options are default, rnn, lstm, gru, none""")
 parser.add_argument('--num-layers', type=int, default=1, metavar='NL',
-                    help='number of epochs to train (default: 1)')
+                    help='number of layers to train (default: 1)')
 parser.add_argument('--bidirectional', type=int, default=0, metavar='B',
                     help='number of epochs to train (default: 0)')
 parser.add_argument('--use-bias', type=int, default=0, metavar='UB',
@@ -121,7 +121,7 @@ else:
 
     # skip_list=['plosser','noyer','bunds','cooperman','urgest','4b',"didn't",'chipotle','djia','5th','direxion']
     skip_list={}
-    contractions_dict = { 
+    contractions_dict = {
     "ain't":'is not',
     "it'll":"it will",
     "there'll":"there will",
@@ -239,7 +239,7 @@ else:
         # Replace contractions and split
         title = expand_contractions(title.lower())
         title = re.findall(r"[\w']+", title.lower())
-        
+
         # Too long of a sentence
         if len(title) >= 20:
             continue
@@ -257,7 +257,7 @@ else:
 
             if w[-2:] == "'s":
                 w = w[-2:]
-            
+
                 sent.append(w)
                 sent.append("'s")
             else:
@@ -432,7 +432,7 @@ def train(tensorboard_writer, callbacklist, total_minibatch_count):
             lengths.append(sent_len)
             training_batch[j] = training[idx][0]
             y_true[j] = labels.index(training[idx][2])
-            
+
         training_batch = training_batch[:,:lengths[0]]
 
         training_batch = Variable(training_batch)
@@ -488,7 +488,7 @@ def test_fn(tensorboard_writer, callbacklist, total_minibatch_count, epoch):
         # print(i, test_batch_idx)
         test_batch = torch.Tensor(len(test_batch_idx), max_sent_len).long()
         y_true = torch.Tensor(len(test_batch_idx)).long()
-        
+
         sent_len = 0
         lengths = []
         for j, i in enumerate(reversed(test_batch_idx)):
@@ -496,7 +496,7 @@ def test_fn(tensorboard_writer, callbacklist, total_minibatch_count, epoch):
             lengths.append(sent_len)
             test_batch[j] = test[i][0]
             y_true[j] = labels.index(test[i][2])
-            
+
         test_batch = test_batch[:,:lengths[0]]
 
         test_batch = Variable(test_batch,volatile=True)
@@ -512,7 +512,7 @@ def test_fn(tensorboard_writer, callbacklist, total_minibatch_count, epoch):
 
         correct += (y_pred == y_true).sum().data.numpy()[0]
         # print(correct)
-        total_minibatch_count += 1 
+        total_minibatch_count += 1
 
     # print(correct, test_size)
     test_loss /= test_size
