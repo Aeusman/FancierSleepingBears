@@ -511,7 +511,7 @@ def train(tensorboard_writer, callbacklist, total_minibatch_count):
         training_batch = Variable(training_batch)
         y_true = Variable(y_true)
         if use_cuda:
-            test_batch, y_true = test_batch.cuda(), y_true.cuda()
+            training_batch, y_true = training_batch.cuda(), y_true.cuda()
 
         y_pred = model(training_batch,lengths)
         loss = F.nll_loss(y_pred, y_true)
