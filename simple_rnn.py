@@ -38,7 +38,7 @@ parser.add_argument('--test-batch-size', type=int, default=256, metavar='TB',
 
 parser.add_argument('--embed-size', type=int, default=32, metavar='ES',
                     help='input batch size for testing (default: 64)')
-parser.add_argument('--hidden-size', type=int, default=64, metavar='HS',
+parser.add_argument('--hidden-size', type=int, default=32, metavar='HS',
                     help='input batch size for testing (default: 64)')
 parser.add_argument('--vocab-size', type=int, default=25000, metavar='VS',
                     help='input batch size for testing (default: 25000)')
@@ -50,8 +50,8 @@ parser.add_argument('--optimizer', type=str, default='adam', metavar='O',
                     help='Optimizer options are sgd, adam, rms_prop')
 # parser.add_argument('--momentum', type=float, default=0.5, metavar='MO',
                     # help='SGD momentum (default: 0.5)')
-# parser.add_argument('--dropout', type=float, default=0.5, metavar='DO',
-                    # help='Dropout probability (default: 0.5)')
+parser.add_argument('--dropout', type=float, default=0, metavar='DO',
+                    help='Dropout probability (default: 0.5)')
 parser.add_argument('--no-cuda', action='store_true', default=False,
                     help='disables CUDA training')
 # parser.add_argument('--save_model', action='store_true', default=False,
@@ -72,16 +72,20 @@ parser.add_argument('--log_dir', type=str, default='./data/', metavar='F',
 # parser.add_argument('--name', type=str, default='', metavar='N',
                     # help="""A name for this training run, this
                             # affects the directory so use underscores and not spaces.""")
-parser.add_argument('--model', type=str, default='gru', metavar='M',
-                    help="""Options are default, rnn, lstm, gru, none""")
+parser.add_argument('--model', type=str, default='parcnn', metavar='M',
+                    help="""Options are default, rnn, lstm, gru, none, seqcnn, parcnn""")
 parser.add_argument('--num-layers', type=int, default=1, metavar='NL',
                     help='number of layers to train (default: 1)')
 parser.add_argument('--bidirectional', type=int, default=0, metavar='B',
                     help='number of epochs to train (default: 0)')
 parser.add_argument('--use-bias', type=int, default=0, metavar='UB',
                     help='number of epochs to train (default: 0)')
-parser.add_argument('--use-rnn-output', type=int, default=1, metavar='RO',
+parser.add_argument('--use-rnn-output', type=int, default=0, metavar='RO',
                     help='number of epochs to train (default: 0)')
+parser.add_argument('--conv-size', type=int, default=3, metavar='CS',
+                    help='number of epochs to train (default: 0)')
+# parser.add_argument('--use-rnn-output', type=int, default=0, metavar='RO',
+                    # help='number of epochs to train (default: 0)')
 # parser.add_argument('--print_log', action='store_true', default=False,
                     # help='prints the csv log when training is complete')
 
@@ -104,6 +108,9 @@ num_layers = args.num_layers
 bidirectional = args.bidirectional
 use_bias = args.use_bias
 use_rnn_output = args.use_rnn_output
+conv_kernel_size = args.conv_size
+max_pool_kernel_size = args.conv_size
+dropout = args.dropout
 
 random.seed(args.seed)
 torch.manual_seed(args.seed)
@@ -399,7 +406,72 @@ class RNNModel(nn.Module):
 
         return F.log_softmax(h, dim=1)
 
-model = RNNModel()
+
+# conv_kernel_size = 3
+# max_pool_kernel_size = 3
+# dropout = 0
+
+class SeqCNNModel(nn.Module):
+    
+    def __init__(self):
+        super(SeqCNNModel, self).__init__()
+
+        # initialize module parameters
+        self.embed = nn.Embedding(vocabulary_size, embed_size)
+        self.num_layers = num_layers
+        self.conv = nn.ModuleList([nn.Conv1d(embed_size, embed_size, conv_kernel_size,padding=int(conv_kernel_size/2)) for k in range(self.num_layers)])
+        
+        self.maxpool = nn.MaxPool1d(max_pool_kernel_size,stride=1,padding=1)
+        self.dropout = nn.Dropout(dropout)
+        self.output = nn.Linear(embed_size, 4)
+
+    def forward(self, x, _):
+        x = self.embed(x)
+        x = x.transpose(1,2)
+        for i in range(self.num_layers):
+            x = self.conv[i](x)
+            x = F.relu(x)
+            x = self.maxpool(x)
+            x = self.dropout(x)
+        x = x.transpose(1,2)
+        x = self.output(x)
+
+        x = x.sum(dim=1)
+        return F.log_softmax(x, dim=1)
+
+class ParCNNModel(nn.Module):
+
+    def __init__(self):
+        super(ParCNNModel, self).__init__()
+        
+        self.embed = nn.Embedding(vocabulary_size, embed_size)
+        self.conv = nn.ModuleList([nn.Conv1d(embed_size, embed_size, k,padding=int(k/2)) for k in range(1,4)])
+
+        self.dropout = nn.Dropout(dropout)
+        self.output = nn.Linear(embed_size * 3, 4)
+
+    def forward(self, x, _):
+        x = self.embed(x)
+        x = x.transpose(1,2)
+        z = []
+        for conv in self.conv:
+            y = F.relu(conv(x))
+            y = F.max_pool1d(y, y.size()[2])
+            z.append(y)
+
+        x = z
+        x = torch.cat(x, 1).view(-1, embed_size * 3)
+        x = self.dropout(x)
+        x = self.output(x)
+        return F.log_softmax(x, dim=1)
+
+if model_name == "parcnn":
+    model = ParCNNModel()
+elif model_name == "seqcnn":
+    model = SeqCNNModel()
+else:
+    model = RNNModel()
+
 print(model)
 
 if use_cuda:
