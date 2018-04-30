@@ -69,9 +69,9 @@ parser.add_argument('--log_interval', type=int, default=0, metavar='I',
                     # help='Where to load model from')
 parser.add_argument('--log_dir', type=str, default='./data/', metavar='F',
                     help='Where to put logging')
-# parser.add_argument('--name', type=str, default='', metavar='N',
-                    # help="""A name for this training run, this
-                            # affects the directory so use underscores and not spaces.""")
+parser.add_argument('--name', type=str, default='', metavar='N',
+                    help="""A name for this training run, this
+                            affects the directory so use underscores and not spaces.""")
 parser.add_argument('--model', type=str, default='parcnn', metavar='M',
                     help="""Options are default, rnn, lstm, gru, none, seqcnn, parcnn""")
 parser.add_argument('--num-layers', type=int, default=1, metavar='NL',
@@ -100,6 +100,7 @@ test_batch_size = args.test_batch_size
 embed_size = args.embed_size
 hidden_size = args.hidden_size
 log_interval = args.log_interval
+log_dir = args.log_dir
 epochs = args.epochs
 learning_rate = args.lr
 model_name = args.model
@@ -412,7 +413,7 @@ class RNNModel(nn.Module):
 # dropout = 0
 
 class SeqCNNModel(nn.Module):
-    
+
     def __init__(self):
         super(SeqCNNModel, self).__init__()
 
@@ -420,7 +421,7 @@ class SeqCNNModel(nn.Module):
         self.embed = nn.Embedding(vocabulary_size, embed_size)
         self.num_layers = num_layers
         self.conv = nn.ModuleList([nn.Conv1d(embed_size, embed_size, conv_kernel_size,padding=int(conv_kernel_size/2)) for k in range(self.num_layers)])
-        
+
         self.maxpool = nn.MaxPool1d(max_pool_kernel_size,stride=1,padding=1)
         self.dropout = nn.Dropout(dropout)
         self.output = nn.Linear(embed_size, 4)
@@ -443,7 +444,7 @@ class ParCNNModel(nn.Module):
 
     def __init__(self):
         super(ParCNNModel, self).__init__()
-        
+
         self.embed = nn.Embedding(vocabulary_size, embed_size)
         self.conv = nn.ModuleList([nn.Conv1d(embed_size, embed_size, k,padding=int(k/2)) for k in range(1,4)])
 
@@ -537,10 +538,10 @@ def train(tensorboard_writer, callbacklist, total_minibatch_count):
                 tensorboard_writer.add_scalar(name, value, global_step=total_minibatch_count)
 
             # put all the parameters in tensorboard histograms
-            # for name, param in model.named_parameters():
-                # name = name.replace('.', '/')
-                # tensorboard_writer.add_histogram(name, param.data.cpu().numpy(), global_step=total_minibatch_count)
-                # tensorboard_writer.add_histogram(name + '/gradient', param.grad.data.cpu().numpy(), global_step=total_minibatch_count)
+            for name, param in model.named_parameters():
+                name = name.replace('.', '/')
+                tensorboard_writer.add_histogram(name, param.data.cpu().numpy(), global_step=total_minibatch_count)
+                tensorboard_writer.add_histogram(name + '/gradient', param.grad.data.cpu().numpy(), global_step=total_minibatch_count)
 
         total_minibatch_count += 1
         # break
@@ -619,11 +620,11 @@ output_on_train_end = os.sys.stdout
 callbacklist = callbacks.CallbackList(
     [callbacks.BaseLogger(),
      callbacks.TQDMCallback(),
-     callbacks.CSVLogger(filename="data/run1.csv",
+     callbacks.CSVLogger(filename=(log_dir + "/data/run1.csv"),
                          output_on_train_end=output_on_train_end)])
 callbacklist.set_params(callback_params)
 
-tensorboard_writer = SummaryWriter(log_dir="data/", comment='simple_rnn_training')
+tensorboard_writer = SummaryWriter(log_dir=(log_dir + "/data/"), comment='simple_rnn_training')
 
 total_minibatch_count = 0
 
