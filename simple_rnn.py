@@ -488,8 +488,9 @@ else:
     raise ValueError('Unsupported optimizer: ' + optimizer_name)
 
 def train(tensorboard_writer, callbacklist, total_minibatch_count):
-
-    correct_count = np.array(0)
+    
+    # import pdb; pdb.set_trace()
+    # correct_count = np.array(0)
     for batch_idx, i in enumerate(range(0, len(training), batch_size)):
 
         callbacklist.on_batch_begin(batch_idx)
@@ -521,7 +522,7 @@ def train(tensorboard_writer, callbacklist, total_minibatch_count):
         _, argmax = torch.max(y_pred, 1)
         compare = (y_true == argmax).float()
         accuracy = compare.mean()
-        correct_count += compare.int().sum().data.numpy()[0]
+        # correct_count += compare.int().sum().data.cpu().numpy()[0]
 
         batch_logs = {
             'loss': np.array(loss.data[0]),
@@ -583,7 +584,7 @@ def test_fn(tensorboard_writer, callbacklist, total_minibatch_count, epoch):
         _, y_pred = torch.max(y_pred, dim=1)
         # print(y_pred, y_true)
 
-        correct += (y_pred == y_true).sum().data.numpy()[0]
+        correct += (y_pred == y_true).sum().data.cpu().numpy()[0]
         # print(correct)
         total_minibatch_count += 1
 
@@ -627,6 +628,9 @@ callbacklist.set_params(callback_params)
 tensorboard_writer = SummaryWriter(log_dir=(log_dir + "/data/"), comment='simple_rnn_training')
 
 total_minibatch_count = 0
+
+# Make sure its using cuda
+model = model.cuda()
 
 callbacklist.on_train_begin()
 for epoch in range(epochs):
