@@ -488,7 +488,7 @@ else:
     raise ValueError('Unsupported optimizer: ' + optimizer_name)
 
 def train(tensorboard_writer, callbacklist, total_minibatch_count):
-    
+
     # import pdb; pdb.set_trace()
     # correct_count = np.array(0)
     for batch_idx, i in enumerate(range(0, len(training), batch_size)):
@@ -630,7 +630,6 @@ tensorboard_writer = SummaryWriter(log_dir=(log_dir + "/data/"), comment='simple
 total_minibatch_count = 0
 
 # Make sure its using cuda
-model = model.cuda()
 
 callbacklist.on_train_begin()
 for epoch in range(epochs):
