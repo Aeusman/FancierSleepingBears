@@ -373,6 +373,8 @@ class RNNModel(nn.Module):
 
         if model_name == "none":
             self.w = nn.Linear(embed_size,4)
+        elif use_rnn_output:
+            self.w = nn.Linear(hidden_size ,4, bias=use_bias)
         else:
             self.use_bidirectional = int(bidirectional == True) + 1
             self.w = nn.Linear(hidden_size * num_layers * self.use_bidirectional,4, bias=use_bias)
