@@ -120,12 +120,12 @@ if use_cuda:
 
 upper_limit_vocab_size = args.vocab_size
 
-if os.path.exists('news_data.p'):
+if os.path.exists('twitter_data.p'):
     print('Load processed data')
-    processed_data, vocabulary = pickle.load(open('news_data.p', 'rb'))
+    processed_data, vocabulary = pickle.load(open('twitter_data.p', 'rb'))
 else:
     print('Create processed data')
-    news_data = pandas.read_csv('uci-news-aggregator.csv')
+    twitter_data = pandas.read_csv('tweets.csv')
 
     # skip_list=['plosser','noyer','bunds','cooperman','urgest','4b',"didn't",'chipotle','djia','5th','direxion']
     skip_list={}
@@ -238,19 +238,19 @@ else:
     processed_data = []
     vocabulary = []
 
-    for i, title in enumerate(news_data.TITLE):
+    for i, title in enumerate(twitter_data.text):
 
         # Log progress
         if i % 10000 == 0:
-            print(i, len(news_data.TITLE))
+            print(i, len(twitter_data.text))
 
         # Replace contractions and split
         title = expand_contractions(title.lower())
         title = re.findall(r"[\w']+", title.lower())
 
         # Too long of a sentence
-        if len(title) >= 20:
-            continue
+        # if len(title) >= 20:
+            # continue
 
         sent = []
         for w in title:
@@ -271,10 +271,10 @@ else:
             else:
                 sent.append(w)
 
-        processed_data.append((sent, news_data.CATEGORY[i]))
+        processed_data.append((sent, twitter_data.handle[i]))
         vocabulary += sent
 
-    pickle.dump((processed_data, vocabulary), open('news_data.p', 'wb'))
+    pickle.dump((processed_data, vocabulary), open('twitter_data.p', 'wb'))
 
 
 
@@ -353,7 +353,8 @@ shuffle(batches)
 
 
 # Hard-coded the labels in
-labels = ['m', 'b', 'e', 't']
+# labels = ['m', 'b', 'e', 't']
+labels = ['HillaryClinton', 'realDonaldTrump']
 
 class RNNModel(nn.Module):
     def __init__(self):
@@ -372,12 +373,12 @@ class RNNModel(nn.Module):
             raise ValueError('Unknown model type: ' + model_name)
 
         if model_name == "none":
-            self.w = nn.Linear(embed_size,4)
+            self.w = nn.Linear(embed_size,2)
         elif use_rnn_output:
-            self.w = nn.Linear(hidden_size ,4, bias=use_bias)
+            self.w = nn.Linear(hidden_size ,2, bias=use_bias)
         else:
             self.use_bidirectional = int(bidirectional == True) + 1
-            self.w = nn.Linear(hidden_size * num_layers * self.use_bidirectional,4, bias=use_bias)
+            self.w = nn.Linear(hidden_size * num_layers * self.use_bidirectional,2, bias=use_bias)
 
         # self.w = nn.Linear(hidden_size,4)
 
@@ -632,6 +633,7 @@ tensorboard_writer = SummaryWriter(log_dir=(log_dir + "/data/"), comment='simple
 total_minibatch_count = 0
 
 # Make sure its using cuda
+model = model.cuda()
 
 callbacklist.on_train_begin()
 for epoch in range(epochs):
