@@ -84,6 +84,10 @@ parser.add_argument('--use-rnn-output', type=int, default=0, metavar='RO',
                     help='number of epochs to train (default: 0)')
 parser.add_argument('--conv-size', type=int, default=3, metavar='CS',
                     help='number of epochs to train (default: 0)')
+parser.add_argument('--small-conv-size', type=int, default=1, metavar='SCS',
+                    help='number of epochs to train (default: 1)')
+parser.add_argument('--large-conv-size', type=int, default=3, metavar='LSC',
+                    help='number of epochs to train (default: 3)')
 # parser.add_argument('--use-rnn-output', type=int, default=0, metavar='RO',
                     # help='number of epochs to train (default: 0)')
 # parser.add_argument('--print_log', action='store_true', default=False,
@@ -112,6 +116,8 @@ use_rnn_output = args.use_rnn_output
 conv_kernel_size = args.conv_size
 max_pool_kernel_size = args.conv_size
 dropout = args.dropout
+small_conv_size = args.small_conv_size
+large_conv_size = args.large_conv_size + 1
 
 random.seed(args.seed)
 torch.manual_seed(args.seed)
@@ -424,7 +430,7 @@ class SeqCNNModel(nn.Module):
         self.num_layers = num_layers
         self.conv = nn.ModuleList([nn.Conv1d(embed_size, embed_size, conv_kernel_size,padding=int(conv_kernel_size/2)) for k in range(self.num_layers)])
 
-        self.maxpool = nn.MaxPool1d(max_pool_kernel_size,stride=1,padding=1)
+        self.maxpool = nn.MaxPool1d(max_pool_kernel_size,stride=1,padding=int(conv_kernel_size/2))
         self.dropout = nn.Dropout(dropout)
         self.output = nn.Linear(embed_size, 4)
 
@@ -448,10 +454,10 @@ class ParCNNModel(nn.Module):
         super(ParCNNModel, self).__init__()
 
         self.embed = nn.Embedding(vocabulary_size, embed_size)
-        self.conv = nn.ModuleList([nn.Conv1d(embed_size, embed_size, k,padding=int(k/2)) for k in range(1,4)])
+        self.conv = nn.ModuleList([nn.Conv1d(embed_size, embed_size, k,padding=int(k/2)) for k in range(small_conv_size,large_conv_size)])
 
         self.dropout = nn.Dropout(dropout)
-        self.output = nn.Linear(embed_size * 3, 4)
+        self.output = nn.Linear(embed_size * (large_conv_size - small_conv_size), 4)
 
     def forward(self, x, _):
         x = self.embed(x)
@@ -463,7 +469,7 @@ class ParCNNModel(nn.Module):
             z.append(y)
 
         x = z
-        x = torch.cat(x, 1).view(-1, embed_size * 3)
+        x = torch.cat(x, 1).view(-1, embed_size * (large_conv_size - small_conv_size))
         x = self.dropout(x)
         x = self.output(x)
         return F.log_softmax(x, dim=1)
