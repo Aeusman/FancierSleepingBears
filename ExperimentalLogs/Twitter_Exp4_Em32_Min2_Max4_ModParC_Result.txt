@@ -1,0 +1,48 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+ParCNNModel(
+  (embed): Embedding(12947, 32)
+  (conv): ModuleList(
+    (0): Conv1d(32, 32, kernel_size=(2,), stride=(1,), padding=(1,))
+    (1): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,))
+    (2): Conv1d(32, 32, kernel_size=(4,), stride=(1,), padding=(2,))
+  )
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=96, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.3792, val_acc: 1079/1289.0 (83.71%)
+Epoch: 1 - validation test results - Average val_loss: 0.2960, val_acc: 1123/1289.0 (87.12%)
+Epoch: 2 - validation test results - Average val_loss: 0.2610, val_acc: 1154/1289.0 (89.53%)
+Epoch: 3 - validation test results - Average val_loss: 0.2665, val_acc: 1164/1289.0 (90.30%)
+Epoch: 4 - validation test results - Average val_loss: 0.3139, val_acc: 1154/1289.0 (89.53%)
+Epoch: 5 - validation test results - Average val_loss: 0.2875, val_acc: 1160/1289.0 (89.99%)
+Epoch: 6 - validation test results - Average val_loss: 0.2901, val_acc: 1168/1289.0 (90.61%)
+Epoch: 7 - validation test results - Average val_loss: 0.2943, val_acc: 1168/1289.0 (90.61%)
+Epoch: 8 - validation test results - Average val_loss: 0.2972, val_acc: 1170/1289.0 (90.77%)
+Epoch: 9 - validation test results - Average val_loss: 0.3025, val_acc: 1170/1289.0 (90.77%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.709990300736765,0.5811973606753881,0.837083,0.379219186130284
+
+1,0.8874878758486906,0.2753047375339079,0.871218,0.2959517581782848
+
+2,0.9565470417070805,0.13348566123603273,0.89526767,0.26100469726846603
+
+3,0.9852570320077595,0.0625814911473098,0.9030256,0.2664993817349383
+
+4,0.9953443258971872,0.026703455469730943,0.89526767,0.31385121889314144
+
+5,0.9968962172647915,0.01720028672832318,0.89992243,0.28751578157127505
+
+6,0.9994180407371483,0.006167076029434257,0.90612876,0.2901379901184603
+
+7,1.0,0.002028581728457783,0.90612876,0.294286198168415
+
+8,1.0,0.001559769586914817,0.9076804,0.29716111413261703
+
+9,1.0,0.0011656702894277764,0.9076804,0.30252881564309747
+
+

@@ -1,0 +1,48 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+ParCNNModel(
+  (embed): Embedding(12947, 16)
+  (conv): ModuleList(
+    (0): Conv1d(16, 16, kernel_size=(2,), stride=(1,), padding=(1,))
+    (1): Conv1d(16, 16, kernel_size=(3,), stride=(1,), padding=(1,))
+    (2): Conv1d(16, 16, kernel_size=(4,), stride=(1,), padding=(2,))
+  )
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=48, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.5097, val_acc: 977/1289.0 (75.80%)
+Epoch: 1 - validation test results - Average val_loss: 0.4287, val_acc: 1050/1289.0 (81.46%)
+Epoch: 2 - validation test results - Average val_loss: 0.3576, val_acc: 1100/1289.0 (85.34%)
+Epoch: 3 - validation test results - Average val_loss: 0.3364, val_acc: 1120/1289.0 (86.89%)
+Epoch: 4 - validation test results - Average val_loss: 0.3170, val_acc: 1137/1289.0 (88.21%)
+Epoch: 5 - validation test results - Average val_loss: 0.3675, val_acc: 1129/1289.0 (87.59%)
+Epoch: 6 - validation test results - Average val_loss: 0.3229, val_acc: 1152/1289.0 (89.37%)
+Epoch: 7 - validation test results - Average val_loss: 0.3336, val_acc: 1152/1289.0 (89.37%)
+Epoch: 8 - validation test results - Average val_loss: 0.3365, val_acc: 1152/1289.0 (89.37%)
+Epoch: 9 - validation test results - Average val_loss: 0.3422, val_acc: 1153/1289.0 (89.45%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.6764306499932601,0.6312045826250552,0.7579519,0.5096871825130158
+
+1,0.8256062076001579,0.3910369996360849,0.814585,0.42865677227615107
+
+2,0.8931134820562561,0.2565709294348406,0.8533747,0.35761058857683253
+
+3,0.9493695441319108,0.14550977812070043,0.8688906,0.33643782240554654
+
+4,0.9809893307468477,0.07687978014046422,0.8820791,0.31697138156698507
+
+5,0.9926285160038797,0.043670605089620236,0.8758728,0.36748906158494615
+
+6,0.991270611057226,0.03940401280752295,0.89371604,0.32294644562193736
+
+7,0.9959262851600388,0.02010617260778256,0.89371604,0.3336119108000312
+
+8,0.9996120271580989,0.006226214474865627,0.89371604,0.33648962489942696
+
+9,1.0,0.0037676296917614135,0.89449185,0.34218308498361855
+
+

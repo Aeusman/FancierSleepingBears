@@ -1,0 +1,47 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+ParCNNModel(
+  (embed): Embedding(12947, 32)
+  (conv): ModuleList(
+    (0): Conv1d(32, 32, kernel_size=(2,), stride=(1,), padding=(1,))
+    (1): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,))
+  )
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=64, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.4527, val_acc: 1032/1289.0 (80.06%)
+Epoch: 1 - validation test results - Average val_loss: 0.3151, val_acc: 1106/1289.0 (85.80%)
+Epoch: 2 - validation test results - Average val_loss: 0.3113, val_acc: 1127/1289.0 (87.43%)
+Epoch: 3 - validation test results - Average val_loss: 0.2395, val_acc: 1173/1289.0 (91.00%)
+Epoch: 4 - validation test results - Average val_loss: 0.2748, val_acc: 1168/1289.0 (90.61%)
+Epoch: 5 - validation test results - Average val_loss: 0.2644, val_acc: 1170/1289.0 (90.77%)
+Epoch: 6 - validation test results - Average val_loss: 0.2535, val_acc: 1183/1289.0 (91.78%)
+Epoch: 7 - validation test results - Average val_loss: 0.2598, val_acc: 1181/1289.0 (91.62%)
+Epoch: 8 - validation test results - Average val_loss: 0.2785, val_acc: 1183/1289.0 (91.78%)
+Epoch: 9 - validation test results - Average val_loss: 0.2768, val_acc: 1179/1289.0 (91.47%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.672356935107049,0.6078007592609158,0.8006206,0.45269750753421945
+
+1,0.8675072744907857,0.3133219700404212,0.8580295,0.3151141152629749
+
+2,0.94180407371484,0.16939272338345604,0.87432116,0.3113091078906951
+
+3,0.9773035887487875,0.08045956512459641,0.9100078,0.2395151266300743
+
+4,0.9953443258971872,0.03234925792682609,0.90612876,0.2747606713240973
+
+5,0.997478176527643,0.019071214991485272,0.9076804,0.26441034704701116
+
+6,0.9998060135790494,0.006435290687059429,0.91776574,0.2535403257566797
+
+7,1.0,0.0038104081361429905,0.9162141,0.25983368804789586
+
+8,1.0,0.002844414123736871,0.91776574,0.2784787585700178
+
+9,1.0,0.002129578798591312,0.91466254,0.276803068452514
+
+

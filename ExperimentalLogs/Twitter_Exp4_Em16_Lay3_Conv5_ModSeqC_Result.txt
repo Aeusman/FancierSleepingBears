@@ -1,0 +1,49 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+SeqCNNModel(
+  (embed): Embedding(12947, 16)
+  (conv): ModuleList(
+    (0): Conv1d(16, 16, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): Conv1d(16, 16, kernel_size=(5,), stride=(1,), padding=(2,))
+    (2): Conv1d(16, 16, kernel_size=(5,), stride=(1,), padding=(2,))
+  )
+  (maxpool): MaxPool1d(kernel_size=5, stride=1, padding=1, dilation=1, ceil_mode=False)
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=16, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.7448, val_acc: 743/1289.0 (57.64%)
+Epoch: 1 - validation test results - Average val_loss: 0.6277, val_acc: 830/1289.0 (64.39%)
+Epoch: 2 - validation test results - Average val_loss: 0.5624, val_acc: 940/1289.0 (72.92%)
+Epoch: 3 - validation test results - Average val_loss: 0.5023, val_acc: 985/1289.0 (76.42%)
+Epoch: 4 - validation test results - Average val_loss: 0.4698, val_acc: 1015/1289.0 (78.74%)
+Epoch: 5 - validation test results - Average val_loss: 0.4698, val_acc: 1038/1289.0 (80.53%)
+Epoch: 6 - validation test results - Average val_loss: 0.5185, val_acc: 1047/1289.0 (81.23%)
+Epoch: 7 - validation test results - Average val_loss: 0.8624, val_acc: 988/1289.0 (76.65%)
+Epoch: 8 - validation test results - Average val_loss: 1.2079, val_acc: 983/1289.0 (76.26%)
+Epoch: 9 - validation test results - Average val_loss: 0.9188, val_acc: 1062/1289.0 (82.39%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.5288069836614666,1.7260152758728753,0.57641584,0.7447667832148916
+
+1,0.710572260011179,0.5859370545896943,0.64391,0.6277009210815904
+
+2,0.779825412232707,0.4783480138251437,0.72924745,0.562445835885935
+
+3,0.8521823472356935,0.36162527125513055,0.76415825,0.5023137515048078
+
+4,0.9150339476236663,0.23145118046165322,0.78743213,0.4697673019278965
+
+5,0.9602327837051406,0.1272018787314687,0.8052754,0.46979284804398186
+
+6,0.9838991270611057,0.06412743740343822,0.8122576,0.5185036503870973
+
+7,0.9924345295829292,0.03871453629118308,0.76648563,0.8623641075507165
+
+8,0.9819592628516004,0.05561600674989802,0.7626067,1.207928505861269
+
+9,0.9258971871968962,0.18887162657470868,0.8238945,0.9187769893530823
+
+

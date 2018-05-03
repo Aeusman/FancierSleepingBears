@@ -1,0 +1,48 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+SeqCNNModel(
+  (embed): Embedding(12947, 128)
+  (conv): ModuleList(
+    (0): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+  )
+  (maxpool): MaxPool1d(kernel_size=5, stride=1, padding=1, dilation=1, ceil_mode=False)
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=128, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.7752, val_acc: 762/1289.0 (59.12%)
+Epoch: 1 - validation test results - Average val_loss: 0.5582, val_acc: 939/1289.0 (72.85%)
+Epoch: 2 - validation test results - Average val_loss: 0.4806, val_acc: 1015/1289.0 (78.74%)
+Epoch: 3 - validation test results - Average val_loss: 0.5385, val_acc: 1067/1289.0 (82.78%)
+Epoch: 4 - validation test results - Average val_loss: 0.6113, val_acc: 1063/1289.0 (82.47%)
+Epoch: 5 - validation test results - Average val_loss: 0.6609, val_acc: 1072/1289.0 (83.17%)
+Epoch: 6 - validation test results - Average val_loss: 0.9700, val_acc: 1046/1289.0 (81.15%)
+Epoch: 7 - validation test results - Average val_loss: 0.9538, val_acc: 1079/1289.0 (83.71%)
+Epoch: 8 - validation test results - Average val_loss: 1.2506, val_acc: 1064/1289.0 (82.54%)
+Epoch: 9 - validation test results - Average val_loss: 1.6157, val_acc: 1029/1289.0 (79.83%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.502618816867832,26.257450213418437,0.59115595,0.7752188093630819
+
+1,0.6742967993049918,0.6123297673307728,0.7284717,0.558217197356065
+
+2,0.8162948593945323,0.39049561738852273,0.78743213,0.4805521021710522
+
+3,0.901648884589642,0.23457652425789116,0.82777345,0.5385382513929653
+
+4,0.9604267701260911,0.10931803088673146,0.8246703,0.6113172668741136
+
+5,0.9866149369544132,0.0458334123130633,0.83165246,0.6608742580014296
+
+6,0.9955383123181377,0.014946619962399895,0.8114818,0.9699643381442832
+
+7,0.9967022308438409,0.009521202666497095,0.837083,0.9538124756261857
+
+8,0.9988360814742968,0.003664036726746297,0.82544607,1.2505754392400465
+
+9,0.9994180407371483,0.002614168838694828,0.79829323,1.6157439700201373
+
+

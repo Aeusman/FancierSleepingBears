@@ -1,0 +1,9 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+RNNModel(
+  (embed): Embedding(12947, 32)
+  (rnn): RNN(32, 16, bidirectional=1)
+  (w): Linear(in_features=16, out_features=2, bias=False)
+)

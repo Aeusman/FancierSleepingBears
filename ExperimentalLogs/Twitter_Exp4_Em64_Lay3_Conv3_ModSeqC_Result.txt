@@ -1,0 +1,49 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+SeqCNNModel(
+  (embed): Embedding(12947, 64)
+  (conv): ModuleList(
+    (0): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+    (1): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+    (2): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+  )
+  (maxpool): MaxPool1d(kernel_size=3, stride=1, padding=1, dilation=1, ceil_mode=False)
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=64, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.7429, val_acc: 631/1289.0 (48.95%)
+Epoch: 1 - validation test results - Average val_loss: 0.6979, val_acc: 631/1289.0 (48.95%)
+Epoch: 2 - validation test results - Average val_loss: 0.6953, val_acc: 658/1289.0 (51.05%)
+Epoch: 3 - validation test results - Average val_loss: 0.6948, val_acc: 658/1289.0 (51.05%)
+Epoch: 4 - validation test results - Average val_loss: 0.6946, val_acc: 658/1289.0 (51.05%)
+Epoch: 5 - validation test results - Average val_loss: 0.6945, val_acc: 658/1289.0 (51.05%)
+Epoch: 6 - validation test results - Average val_loss: 0.6946, val_acc: 658/1289.0 (51.05%)
+Epoch: 7 - validation test results - Average val_loss: 0.6946, val_acc: 658/1289.0 (51.05%)
+Epoch: 8 - validation test results - Average val_loss: 0.6946, val_acc: 658/1289.0 (51.05%)
+Epoch: 9 - validation test results - Average val_loss: 0.6947, val_acc: 658/1289.0 (51.05%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.49524733288327427,5.224367120888023,0.48952678,0.742873150771491
+
+1,0.48981571309665933,0.7212169184948378,0.48952678,0.6979074093424321
+
+2,0.5070805043704757,0.696186183056244,0.51047325,0.6952715659899893
+
+3,0.4942774005877405,0.6970138090195642,0.51047325,0.6947894100073791
+
+4,0.4892337536430266,0.6973793520844179,0.51047325,0.6946421346523856
+
+5,0.4892337536430266,0.6986402340009302,0.51047325,0.6945428086214975
+
+6,0.4892337536430266,0.6992542059877102,0.51047325,0.6945753977962758
+
+7,0.4892337536430266,0.7000759513486831,0.51047325,0.694624323730232
+
+8,0.491173617852532,0.7004989780232701,0.51047325,0.694648138953328
+
+9,0.491173617852532,0.7007153243722555,0.51047325,0.6946620970756348
+
+

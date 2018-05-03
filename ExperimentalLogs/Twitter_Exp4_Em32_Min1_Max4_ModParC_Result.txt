@@ -1,0 +1,49 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+ParCNNModel(
+  (embed): Embedding(12947, 32)
+  (conv): ModuleList(
+    (0): Conv1d(32, 32, kernel_size=(1,), stride=(1,))
+    (1): Conv1d(32, 32, kernel_size=(2,), stride=(1,), padding=(1,))
+    (2): Conv1d(32, 32, kernel_size=(3,), stride=(1,), padding=(1,))
+    (3): Conv1d(32, 32, kernel_size=(4,), stride=(1,), padding=(2,))
+  )
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=128, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.3931, val_acc: 1084/1289.0 (84.10%)
+Epoch: 1 - validation test results - Average val_loss: 0.2994, val_acc: 1126/1289.0 (87.35%)
+Epoch: 2 - validation test results - Average val_loss: 0.2621, val_acc: 1158/1289.0 (89.84%)
+Epoch: 3 - validation test results - Average val_loss: 0.5523, val_acc: 1039/1289.0 (80.61%)
+Epoch: 4 - validation test results - Average val_loss: 0.2915, val_acc: 1173/1289.0 (91.00%)
+Epoch: 5 - validation test results - Average val_loss: 0.2824, val_acc: 1180/1289.0 (91.54%)
+Epoch: 6 - validation test results - Average val_loss: 0.2905, val_acc: 1177/1289.0 (91.31%)
+Epoch: 7 - validation test results - Average val_loss: 0.2988, val_acc: 1176/1289.0 (91.23%)
+Epoch: 8 - validation test results - Average val_loss: 0.2972, val_acc: 1183/1289.0 (91.78%)
+Epoch: 9 - validation test results - Average val_loss: 0.3010, val_acc: 1183/1289.0 (91.78%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.6839961203409559,0.5928645949301271,0.840962,0.3931179860472402
+
+1,0.8942774005819593,0.2764636329114148,0.8735454,0.2993740661834172
+
+2,0.9575169738118332,0.13432458013415366,0.8983708,0.26211223128787114
+
+3,0.9734238603297769,0.08352456726856479,0.8060512,0.5522543394445356
+
+4,0.9842870999030068,0.049491171093764205,0.9100078,0.29151628477985864
+
+5,0.9961202715809894,0.019581844226369556,0.91543835,0.2824083177316457
+
+6,0.9992240543161979,0.005629366699677994,0.9131109,0.29050472487397117
+
+7,1.0,0.0020155386827562264,0.91233516,0.2987526633926285
+
+8,1.0,0.001692215246952362,0.91776574,0.29720016003024957
+
+9,1.0,0.0010975835858198348,0.91776574,0.30097710762586216
+
+

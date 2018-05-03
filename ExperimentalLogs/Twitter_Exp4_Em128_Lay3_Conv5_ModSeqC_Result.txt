@@ -1,0 +1,49 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+SeqCNNModel(
+  (embed): Embedding(12947, 128)
+  (conv): ModuleList(
+    (0): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+  )
+  (maxpool): MaxPool1d(kernel_size=5, stride=1, padding=1, dilation=1, ceil_mode=False)
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=128, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.6860, val_acc: 804/1289.0 (62.37%)
+Epoch: 1 - validation test results - Average val_loss: 0.6004, val_acc: 887/1289.0 (68.81%)
+Epoch: 2 - validation test results - Average val_loss: 0.6216, val_acc: 917/1289.0 (71.14%)
+Epoch: 3 - validation test results - Average val_loss: 0.6990, val_acc: 990/1289.0 (76.80%)
+Epoch: 4 - validation test results - Average val_loss: 0.9677, val_acc: 946/1289.0 (73.39%)
+Epoch: 5 - validation test results - Average val_loss: 1.5951, val_acc: 914/1289.0 (70.91%)
+Epoch: 6 - validation test results - Average val_loss: 0.6611, val_acc: 998/1289.0 (77.42%)
+Epoch: 7 - validation test results - Average val_loss: 0.6494, val_acc: 981/1289.0 (76.11%)
+Epoch: 8 - validation test results - Average val_loss: 0.6954, val_acc: 985/1289.0 (76.42%)
+Epoch: 9 - validation test results - Average val_loss: 1.1093, val_acc: 1014/1289.0 (78.67%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.5635305530231746,67.66431442585879,0.62373936,0.686006402118526
+
+1,0.7142580020439266,0.556359609368932,0.6881303,0.6003911940971949
+
+2,0.8335596508475672,0.3759643157429191,0.7114042,0.6215579541178985
+
+3,0.9119301649115827,0.22163691164855234,0.76803726,0.6990094669481134
+
+4,0.9464597478407778,0.14110007992829082,0.7339023,0.9676642850723444
+
+5,0.9497575170200618,0.14556174643634015,0.7090768,1.5951211868653101
+
+6,0.930358874890321,0.36121356199946253,0.7742436,0.6611470014573624
+
+7,0.9582929194956353,0.13849058774752482,0.76105505,0.6493858665898384
+
+8,0.9773035887487875,0.07966872209648734,0.76415825,0.6953973636967531
+
+9,0.9809893307468477,0.05735889568267287,0.7866563,1.1093320750376343
+
+
