@@ -5,5 +5,39 @@ Create training and testing splits
 RNNModel(
   (embed): Embedding(25000, 32)
   (rnn): LSTM(32, 16, num_layers=2, bidirectional=0)
-  (w): Linear(in_features=32, out_features=4, bias=False)
+  (w): Linear(in_features=16, out_features=4, bias=False)
 )
+Epoch: 0 - validation test results - Average val_loss: 0.1938, val_acc: 78941/84482.0 (93.44%)
+Epoch: 1 - validation test results - Average val_loss: 0.1820, val_acc: 79423/84482.0 (94.01%)
+Epoch: 2 - validation test results - Average val_loss: 0.1874, val_acc: 79405/84482.0 (93.99%)
+Epoch: 3 - validation test results - Average val_loss: 0.1971, val_acc: 79353/84482.0 (93.93%)
+Epoch: 4 - validation test results - Average val_loss: 0.2049, val_acc: 79335/84482.0 (93.91%)
+Epoch: 5 - validation test results - Average val_loss: 0.2123, val_acc: 79295/84482.0 (93.86%)
+Epoch: 6 - validation test results - Average val_loss: 0.2194, val_acc: 79277/84482.0 (93.84%)
+Epoch: 7 - validation test results - Average val_loss: 0.2243, val_acc: 79292/84482.0 (93.86%)
+Epoch: 8 - validation test results - Average val_loss: 0.2292, val_acc: 79205/84482.0 (93.75%)
+Epoch: 9 - validation test results - Average val_loss: 0.2413, val_acc: 79135/84482.0 (93.67%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.897270712314,0.286100551892,0.9344120621681213,0.19379257444586073
+
+1,0.946985591563,0.154031105741,0.9401174187660217,0.18195853127249506
+
+2,0.957035099297,0.123353389965,0.9399043321609497,0.18739177565108073
+
+3,0.962799657914,0.10516786378,0.939288854598999,0.19705679533582002
+
+4,0.966910013109,0.0938432036761,0.939075767993927,0.20485240266941412
+
+5,0.969511166613,0.0859926516961,0.9386023283004761,0.21233107565258472
+
+6,0.971698029456,0.0796510099094,0.938389241695404,0.2194127003078183
+
+7,0.972736715326,0.0753865873991,0.9385668039321899,0.22425367391927223
+
+8,0.97429918296,0.0715522998672,0.9375370144844055,0.22915422675581265
+
+9,0.975207663194,0.068406662262,0.936708390712738,0.24126068404986115
+
+

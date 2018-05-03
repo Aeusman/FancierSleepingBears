@@ -638,7 +638,6 @@ tensorboard_writer = SummaryWriter(log_dir=(log_dir + "/data/"), comment='simple
 total_minibatch_count = 0
 
 # Make sure its using cuda
-model = model.cuda()
 
 callbacklist.on_train_begin()
 for epoch in range(epochs):

@@ -2,8 +2,8 @@
 
 # Windows Setup
 # SET LogDir=C:\Users\Lexa3_000\source\repos\PythonApplication1\PythonApplication1\FancierSleepingBears\ExperimentalLogs
-
 # SET simple_rnn.py=C:\Users\Lexa3_000\source\repos\PythonApplication1\PythonApplication1\FancierSleepingBears\simple_rnn.py
+# SET CNN.py=C:\Users\Lexa3_000\source\repos\PythonApplication1\PythonApplication1\FancierSleepingBears\CNN.py
 
 
 #First Set of Experiments with no additional model
@@ -53,3 +53,55 @@ python %simple_rnn.py% --use-rnn-output 0 --embed-size 16 --hidden-size 8 --mode
 python %simple_rnn.py% --use-rnn-output 0 --embed-size 32 --hidden-size 16 --model lstm --log_dir %LogDir%\Exp3_RnOutFalse_Em32_Hid16_ModLSTM > %LogDir%\Exp3_RnOutFalse_Em32_Hid16_ModLSTM_Result.txt
 python %simple_rnn.py% --use-rnn-output 0 --embed-size 64 --hidden-size 32 --model lstm --log_dir %LogDir%\Exp3_RnOutFalse_Em64_Hid32_ModLSTM > %LogDir%\Exp3_RnOutFalse_Em64_Hid32_ModLSTM_Result.txt
 python %simple_rnn.py% --use-rnn-output 0 --embed-size 128 --hidden-size 64 --model lstm --log_dir %LogDir%\Exp3_RnOutFalse_Em128_Hid64_ModLSTM > %LogDir%\Exp3_RnOutFalse_Em128_Hid64_ModLSTM_Result.txt
+
+#Fourth set of experiments, convolutional networks specifically
+python %simple_rnn.py% --model seqcnn --embed-size 16 --num-layers 1 --conv-size 3 --log_dir %LogDir%\Exp4_Em16_Lay1_Conv3_ModSeqC > %LogDir%\Exp4_Em16_Lay1_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 16 --num-layers 1 --conv-size 4 --log_dir %LogDir%\Exp4_Em16_Lay1_Conv4_ModSeqC > %LogDir%\Exp4_Em16_Lay1_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 16 --num-layers 1 --conv-size 5 --log_dir %LogDir%\Exp4_Em16_Lay1_Conv5_ModSeqC > %LogDir%\Exp4_Em16_Lay1_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 16 --num-layers 2 --conv-size 3 --log_dir %LogDir%\Exp4_Em16_Lay2_Conv3_ModSeqC > %LogDir%\Exp4_Em16_Lay2_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 16 --num-layers 2 --conv-size 4 --log_dir %LogDir%\Exp4_Em16_Lay2_Conv4_ModSeqC > %LogDir%\Exp4_Em16_Lay2_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 16 --num-layers 2 --conv-size 5 --log_dir %LogDir%\Exp4_Em16_Lay2_Conv5_ModSeqC > %LogDir%\Exp4_Em16_Lay2_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 16 --num-layers 3 --conv-size 3 --log_dir %LogDir%\Exp4_Em16_Lay3_Conv3_ModSeqC > %LogDir%\Exp4_Em16_Lay3_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 16 --num-layers 3 --conv-size 4 --log_dir %LogDir%\Exp4_Em16_Lay3_Conv4_ModSeqC > %LogDir%\Exp4_Em16_Lay3_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 16 --num-layers 3 --conv-size 5 --log_dir %LogDir%\Exp4_Em16_Lay3_Conv5_ModSeqC > %LogDir%\Exp4_Em16_Lay3_Conv5_ModSeqC_Result.txt
+
+python %simple_rnn.py% --model seqcnn --embed-size 32 --num-layers 1 --conv-size 3 --log_dir %LogDir%\Exp4_Em32_Lay1_Conv3_ModSeqC > %LogDir%\Exp4_Em32_Lay1_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 32 --num-layers 1 --conv-size 4 --log_dir %LogDir%\Exp4_Em32_Lay1_Conv4_ModSeqC > %LogDir%\Exp4_Em32_Lay1_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 32 --num-layers 1 --conv-size 5 --log_dir %LogDir%\Exp4_Em32_Lay1_Conv5_ModSeqC > %LogDir%\Exp4_Em32_Lay1_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 32 --num-layers 2 --conv-size 3 --log_dir %LogDir%\Exp4_Em32_Lay2_Conv3_ModSeqC > %LogDir%\Exp4_Em32_Lay2_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 32 --num-layers 2 --conv-size 4 --log_dir %LogDir%\Exp4_Em32_Lay2_Conv4_ModSeqC > %LogDir%\Exp4_Em32_Lay2_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 32 --num-layers 2 --conv-size 5 --log_dir %LogDir%\Exp4_Em32_Lay2_Conv5_ModSeqC > %LogDir%\Exp4_Em32_Lay2_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 32 --num-layers 3 --conv-size 3 --log_dir %LogDir%\Exp4_Em32_Lay3_Conv3_ModSeqC > %LogDir%\Exp4_Em32_Lay3_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 32 --num-layers 3 --conv-size 4 --log_dir %LogDir%\Exp4_Em32_Lay3_Conv4_ModSeqC > %LogDir%\Exp4_Em32_Lay3_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 32 --num-layers 3 --conv-size 5 --log_dir %LogDir%\Exp4_Em32_Lay3_Conv5_ModSeqC > %LogDir%\Exp4_Em32_Lay3_Conv5_ModSeqC_Result.txt
+
+python %simple_rnn.py% --model seqcnn --embed-size 64 --num-layers 1 --conv-size 3 --log_dir %LogDir%\Exp4_Em64_Lay1_Conv3_ModSeqC > %LogDir%\Exp4_Em64_Lay1_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 64 --num-layers 1 --conv-size 4 --log_dir %LogDir%\Exp4_Em64_Lay1_Conv4_ModSeqC > %LogDir%\Exp4_Em64_Lay1_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 64 --num-layers 1 --conv-size 5 --log_dir %LogDir%\Exp4_Em64_Lay1_Conv5_ModSeqC > %LogDir%\Exp4_Em64_Lay1_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 64 --num-layers 2 --conv-size 3 --log_dir %LogDir%\Exp4_Em64_Lay2_Conv3_ModSeqC > %LogDir%\Exp4_Em64_Lay2_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 64 --num-layers 2 --conv-size 4 --log_dir %LogDir%\Exp4_Em64_Lay2_Conv4_ModSeqC > %LogDir%\Exp4_Em64_Lay2_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 64 --num-layers 2 --conv-size 5 --log_dir %LogDir%\Exp4_Em64_Lay2_Conv5_ModSeqC > %LogDir%\Exp4_Em64_Lay2_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 64 --num-layers 3 --conv-size 3 --log_dir %LogDir%\Exp4_Em64_Lay3_Conv3_ModSeqC > %LogDir%\Exp4_Em64_Lay3_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 64 --num-layers 3 --conv-size 4 --log_dir %LogDir%\Exp4_Em64_Lay3_Conv4_ModSeqC > %LogDir%\Exp4_Em64_Lay3_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 64 --num-layers 3 --conv-size 5 --log_dir %LogDir%\Exp4_Em64_Lay3_Conv5_ModSeqC > %LogDir%\Exp4_Em64_Lay3_Conv5_ModSeqC_Result.txt
+
+python %simple_rnn.py% --model seqcnn --embed-size 128 --num-layers 1 --conv-size 3 --log_dir %LogDir%\Exp4_Em128_Lay1_Conv3_ModSeqC > %LogDir%\Exp4_Em128_Lay1_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 128 --num-layers 1 --conv-size 4 --log_dir %LogDir%\Exp4_Em128_Lay1_Conv4_ModSeqC > %LogDir%\Exp4_Em128_Lay1_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 128 --num-layers 1 --conv-size 5 --log_dir %LogDir%\Exp4_Em128_Lay1_Conv5_ModSeqC > %LogDir%\Exp4_Em128_Lay1_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 128 --num-layers 2 --conv-size 3 --log_dir %LogDir%\Exp4_Em128_Lay2_Conv3_ModSeqC > %LogDir%\Exp4_Em128_Lay2_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 128 --num-layers 2 --conv-size 4 --log_dir %LogDir%\Exp4_Em128_Lay2_Conv4_ModSeqC > %LogDir%\Exp4_Em128_Lay2_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 128 --num-layers 2 --conv-size 5 --log_dir %LogDir%\Exp4_Em128_Lay2_Conv5_ModSeqC > %LogDir%\Exp4_Em128_Lay2_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 128 --num-layers 3 --conv-size 3 --log_dir %LogDir%\Exp4_Em128_Lay3_Conv3_ModSeqC > %LogDir%\Exp4_Em128_Lay3_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 128 --num-layers 3 --conv-size 4 --log_dir %LogDir%\Exp4_Em128_Lay3_Conv4_ModSeqC > %LogDir%\Exp4_Em128_Lay3_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model seqcnn --embed-size 128 --num-layers 3 --conv-size 5 --log_dir %LogDir%\Exp4_Em128_Lay3_Conv5_ModSeqC > %LogDir%\Exp4_Em128_Lay3_Conv5_ModSeqC_Result.txt
+
+# Now look at parcnn
+python %simple_rnn.py% --model parcnn --embed-size 16 --num-layers 1 --conv-size 3 --log_dir %LogDir%\Exp4_Em16_Lay1_Conv3_ModSeqC > %LogDir%\Exp4_Em16_Lay1_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model parcnn --embed-size 16 --num-layers 1 --conv-size 4 --log_dir %LogDir%\Exp4_Em16_Lay1_Conv4_ModSeqC > %LogDir%\Exp4_Em16_Lay1_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model parcnn --embed-size 16 --num-layers 1 --conv-size 5 --log_dir %LogDir%\Exp4_Em16_Lay1_Conv5_ModSeqC > %LogDir%\Exp4_Em16_Lay1_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model parcnn --embed-size 16 --num-layers 2 --conv-size 3 --log_dir %LogDir%\Exp4_Em16_Lay2_Conv3_ModSeqC > %LogDir%\Exp4_Em16_Lay2_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model parcnn --embed-size 16 --num-layers 2 --conv-size 4 --log_dir %LogDir%\Exp4_Em16_Lay2_Conv4_ModSeqC > %LogDir%\Exp4_Em16_Lay2_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model parcnn --embed-size 16 --num-layers 2 --conv-size 5 --log_dir %LogDir%\Exp4_Em16_Lay2_Conv5_ModSeqC > %LogDir%\Exp4_Em16_Lay2_Conv5_ModSeqC_Result.txt
+python %simple_rnn.py% --model parcnn --embed-size 16 --num-layers 3 --conv-size 3 --log_dir %LogDir%\Exp4_Em16_Lay3_Conv3_ModSeqC > %LogDir%\Exp4_Em16_Lay3_Conv3_ModSeqC_Result.txt
+python %simple_rnn.py% --model parcnn --embed-size 16 --num-layers 3 --conv-size 4 --log_dir %LogDir%\Exp4_Em16_Lay3_Conv4_ModSeqC > %LogDir%\Exp4_Em16_Lay3_Conv4_ModSeqC_Result.txt
+python %simple_rnn.py% --model parcnn --embed-size 16 --num-layers 3 --conv-size 5 --log_dir %LogDir%\Exp4_Em16_Lay3_Conv5_ModSeqC > %LogDir%\Exp4_Em16_Lay3_Conv5_ModSeqC_Result.txt
