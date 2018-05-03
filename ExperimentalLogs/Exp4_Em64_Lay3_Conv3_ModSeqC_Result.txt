@@ -1,0 +1,49 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+SeqCNNModel(
+  (embed): Embedding(25000, 64)
+  (conv): ModuleList(
+    (0): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+    (1): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+    (2): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+  )
+  (maxpool): MaxPool1d(kernel_size=3, stride=1, padding=1, dilation=1, ceil_mode=False)
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=64, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.4244, val_acc: 72719/84482.0 (86.08%)
+Epoch: 1 - validation test results - Average val_loss: 0.4594, val_acc: 71157/84482.0 (84.23%)
+Epoch: 2 - validation test results - Average val_loss: 0.3804, val_acc: 73677/84482.0 (87.21%)
+Epoch: 3 - validation test results - Average val_loss: 0.3407, val_acc: 74700/84482.0 (88.42%)
+Epoch: 4 - validation test results - Average val_loss: 0.3056, val_acc: 75811/84482.0 (89.74%)
+Epoch: 5 - validation test results - Average val_loss: 0.2925, val_acc: 76898/84482.0 (91.02%)
+Epoch: 6 - validation test results - Average val_loss: 0.2832, val_acc: 77374/84482.0 (91.59%)
+Epoch: 7 - validation test results - Average val_loss: 0.2587, val_acc: 77921/84482.0 (92.23%)
+Epoch: 8 - validation test results - Average val_loss: 0.2819, val_acc: 77560/84482.0 (91.81%)
+Epoch: 9 - validation test results - Average val_loss: 0.2807, val_acc: 77798/84482.0 (92.09%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.8046116468943281,0.5486238595629248,0.86076325,0.4243807985414562
+
+1,0.8934947488660557,0.31611853890908337,0.84227407,0.4593822402271825
+
+2,0.9090099340983692,0.2692933897542374,0.8721029,0.3803747320420131
+
+3,0.9213972248444191,0.23285816726940428,0.884212,0.34065517521624744
+
+4,0.925803501939768,0.22336103045769165,0.89736277,0.30557391514891813
+
+5,0.9345036058087078,0.19633814577010356,0.9102294,0.2925241407392287
+
+6,0.933287366798331,0.20876193259111578,0.91586375,0.2832352377999752
+
+7,0.9441210675678475,0.1673407044738138,0.9223385,0.2587443820646954
+
+8,0.9490777593977398,0.153956167333013,0.91806537,0.2818524781559422
+
+9,0.9507437996963841,0.15005810063004704,0.9208826,0.2807326362100346
+
+

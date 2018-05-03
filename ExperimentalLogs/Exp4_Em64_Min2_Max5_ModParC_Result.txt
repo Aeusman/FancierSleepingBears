@@ -1,0 +1,24 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+ParCNNModel(
+  (embed): Embedding(25000, 64)
+  (conv): ModuleList(
+    (0): Conv1d(64, 64, kernel_size=(2,), stride=(1,), padding=(1,))
+    (1): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+    (2): Conv1d(64, 64, kernel_size=(4,), stride=(1,), padding=(2,))
+    (3): Conv1d(64, 64, kernel_size=(5,), stride=(1,), padding=(2,))
+  )
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=256, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.2372, val_acc: 77902/84482.0 (92.21%)
+Epoch: 1 - validation test results - Average val_loss: 0.2118, val_acc: 79038/84482.0 (93.56%)
+Epoch: 2 - validation test results - Average val_loss: 0.3192, val_acc: 78376/84482.0 (92.77%)
+Epoch: 3 - validation test results - Average val_loss: 0.3355, val_acc: 78748/84482.0 (93.21%)
+Epoch: 4 - validation test results - Average val_loss: 0.4407, val_acc: 78699/84482.0 (93.15%)
+Epoch: 5 - validation test results - Average val_loss: 0.6152, val_acc: 78427/84482.0 (92.83%)
+Epoch: 6 - validation test results - Average val_loss: 0.6355, val_acc: 78492/84482.0 (92.91%)
+Epoch: 7 - validation test results - Average val_loss: 0.7406, val_acc: 78483/84482.0 (92.90%)
+Epoch: 8 - validation test results - Average val_loss: 0.9655, val_acc: 78329/84482.0 (92.72%)

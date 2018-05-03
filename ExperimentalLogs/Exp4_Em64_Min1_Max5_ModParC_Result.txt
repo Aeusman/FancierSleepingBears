@@ -1,0 +1,50 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+ParCNNModel(
+  (embed): Embedding(25000, 64)
+  (conv): ModuleList(
+    (0): Conv1d(64, 64, kernel_size=(1,), stride=(1,))
+    (1): Conv1d(64, 64, kernel_size=(2,), stride=(1,), padding=(1,))
+    (2): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+    (3): Conv1d(64, 64, kernel_size=(4,), stride=(1,), padding=(2,))
+    (4): Conv1d(64, 64, kernel_size=(5,), stride=(1,), padding=(2,))
+  )
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=320, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.2133, val_acc: 78599/84482.0 (93.04%)
+Epoch: 1 - validation test results - Average val_loss: 0.2423, val_acc: 78375/84482.0 (92.77%)
+Epoch: 2 - validation test results - Average val_loss: 0.2877, val_acc: 78725/84482.0 (93.19%)
+Epoch: 3 - validation test results - Average val_loss: 0.4046, val_acc: 78057/84482.0 (92.39%)
+Epoch: 4 - validation test results - Average val_loss: 0.4404, val_acc: 78043/84482.0 (92.38%)
+Epoch: 5 - validation test results - Average val_loss: 0.5000, val_acc: 78542/84482.0 (92.97%)
+Epoch: 6 - validation test results - Average val_loss: 0.5699, val_acc: 78486/84482.0 (92.90%)
+Epoch: 7 - validation test results - Average val_loss: 0.7905, val_acc: 78441/84482.0 (92.85%)
+Epoch: 8 - validation test results - Average val_loss: 0.8155, val_acc: 78197/84482.0 (92.56%)
+Epoch: 9 - validation test results - Average val_loss: 0.7808, val_acc: 78336/84482.0 (92.73%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.9015260692398063,0.28585446668088105,0.9303639,0.2132763584800094
+
+1,0.9456184323833254,0.16327199509998153,0.92771244,0.24229358494534348
+
+2,0.9542090451488043,0.13948893996835673,0.9318553,0.28767325099180974
+
+3,0.9583963400379372,0.13021747754815718,0.9239483,0.4045771816819261
+
+4,0.9630541507487108,0.11964143547283472,0.9237826,0.4404416069953167
+
+5,0.9653179532857689,0.1133104951059974,0.92968917,0.5000082594616695
+
+6,0.9688275870232328,0.10694318500968261,0.9290263,0.5699066374016932
+
+7,0.9710825119034584,0.09755757490788852,0.9284936,0.7904673516390515
+
+8,0.9715619053819315,0.1021217131404648,0.9256055,0.8154799118939653
+
+9,0.9738316263571718,0.09036390796296387,0.9272508,0.780783963387997
+
+

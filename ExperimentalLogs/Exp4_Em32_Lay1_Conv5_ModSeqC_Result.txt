@@ -1,0 +1,47 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+SeqCNNModel(
+  (embed): Embedding(25000, 32)
+  (conv): ModuleList(
+    (0): Conv1d(32, 32, kernel_size=(5,), stride=(1,), padding=(2,))
+  )
+  (maxpool): MaxPool1d(kernel_size=5, stride=1, padding=2, dilation=1, ceil_mode=False)
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=32, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.2535, val_acc: 77218/84482.0 (91.40%)
+Epoch: 1 - validation test results - Average val_loss: 0.2215, val_acc: 78166/84482.0 (92.52%)
+Epoch: 2 - validation test results - Average val_loss: 0.2664, val_acc: 77573/84482.0 (91.82%)
+Epoch: 3 - validation test results - Average val_loss: 0.2980, val_acc: 77860/84482.0 (92.16%)
+Epoch: 4 - validation test results - Average val_loss: 0.3364, val_acc: 77923/84482.0 (92.24%)
+Epoch: 5 - validation test results - Average val_loss: 0.3805, val_acc: 77819/84482.0 (92.11%)
+Epoch: 6 - validation test results - Average val_loss: 0.4628, val_acc: 77590/84482.0 (91.84%)
+Epoch: 7 - validation test results - Average val_loss: 0.4643, val_acc: 78117/84482.0 (92.47%)
+Epoch: 8 - validation test results - Average val_loss: 0.5185, val_acc: 78057/84482.0 (92.39%)
+Epoch: 9 - validation test results - Average val_loss: 0.5818, val_acc: 78043/84482.0 (92.38%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.8691906831948912,0.3819221185001025,0.9140172,0.2535005633398844
+
+1,0.9420229812947767,0.1719305462166222,0.9252385,0.2214837698110032
+
+2,0.9509479858075857,0.14599187442191988,0.91821927,0.26640212691357124
+
+3,0.9546203765902103,0.13680206220028562,0.92161644,0.2980242958546577
+
+4,0.9577778632663267,0.12807540350971958,0.92236215,0.33643037198023973
+
+5,0.9624179186629065,0.11372068748271409,0.92113113,0.38045164030701856
+
+6,0.9642763081967407,0.10793871984941908,0.9184205,0.46283960314186
+
+7,0.9679753319503916,0.09687394199897323,0.92465854,0.46429780515000374
+
+8,0.968635237788043,0.09836365150076284,0.9239483,0.51845797769178
+
+9,0.971399148336771,0.08631790681601632,0.9237826,0.5818279655855524
+
+
