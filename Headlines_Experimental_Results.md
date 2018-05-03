@@ -37,7 +37,7 @@ RNN - 35.23%, Epoch 0
 
 #### 2 Layers
 
-GRU -36.14%, Epoch 0  
+GRU - 36.14%, Epoch 0  
 LSTM - 36.14%, Epoch 0  
 RNN - 35.60%, Epoch 1  
 
