@@ -1,0 +1,43 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+RNNModel(
+  (embed): Embedding(25000, 64)
+  (rnn): GRU(64, 32, bidirectional=0)
+  (w): Linear(in_features=32, out_features=4, bias=False)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.1781, val_acc: 79278/84482.0 (93.84%)
+Epoch: 1 - validation test results - Average val_loss: 0.1756, val_acc: 79480/84482.0 (94.08%)
+Epoch: 2 - validation test results - Average val_loss: 0.1842, val_acc: 79510/84482.0 (94.11%)
+Epoch: 3 - validation test results - Average val_loss: 0.1907, val_acc: 79489/84482.0 (94.09%)
+Epoch: 4 - validation test results - Average val_loss: 0.1952, val_acc: 79399/84482.0 (93.98%)
+Epoch: 5 - validation test results - Average val_loss: 0.2034, val_acc: 79345/84482.0 (93.92%)
+Epoch: 6 - validation test results - Average val_loss: 0.2081, val_acc: 79288/84482.0 (93.85%)
+Epoch: 7 - validation test results - Average val_loss: 0.2080, val_acc: 79299/84482.0 (93.86%)
+Epoch: 8 - validation test results - Average val_loss: 0.2102, val_acc: 79281/84482.0 (93.84%)
+Epoch: 9 - validation test results - Average val_loss: 0.2178, val_acc: 79153/84482.0 (93.69%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.9049913146924028,0.26518601182169943,0.9384011,0.17814019524106553
+
+1,0.9507437996963841,0.13981035786158041,0.94079214,0.1756362395542696
+
+2,0.9594379851269653,0.1144007662380818,0.9411472,0.1842355307201576
+
+3,0.9631133351285929,0.1028877818332955,0.94089866,0.19073458407735208
+
+4,0.9654363220458857,0.0957843387002321,0.93983334,0.19519915897053036
+
+5,0.9675255306619477,0.08976040662503684,0.93919414,0.2033859818686291
+
+6,0.9688867714032913,0.0860774657157055,0.9385194,0.2080710240209174
+
+7,0.9685523796559612,0.08627766552571477,0.93864965,0.20800945288710362
+
+8,0.9694490230138462,0.08359601459149084,0.93843657,0.2102154708123676
+
+9,0.9705084234168918,0.08089916360240113,0.9369215,0.2177982586740344
+
+

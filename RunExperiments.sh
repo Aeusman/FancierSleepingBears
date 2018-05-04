@@ -1,9 +1,23 @@
 # Run experiments for Deep Learning
 
 # Windows Setup
-# SET LogDir=C:\Users\Lexa3_000\source\repos\PythonApplication1\PythonApplication1\FancierSleepingBears\ExperimentalLogs
-# SET simple_rnn.py=C:\Users\Lexa3_000\source\repos\PythonApplication1\PythonApplication1\FancierSleepingBears\simple_rnn.py
+SET LogDir=C:\Users\Lexa3_000\source\repos\PythonApplication1\PythonApplication1\FancierSleepingBears\ExperimentalLogs
+SET simple_rnn.py=C:\Users\Lexa3_000\source\repos\PythonApplication1\PythonApplication1\FancierSleepingBears\simple_rnn.py
 SET twitter.py=C:\Users\Lexa3_000\source\repos\PythonApplication1\PythonApplication1\FancierSleepingBears\twitter.py
+
+python %simple_rnn.py% --embed-size 64 --name Headlines_Exp1_ModelNone_Em64 > Headlines_Exp1_ModelNone_Em64_Result.txt
+python %simple_rnn.py% --use-rnn-output 0 --embed-size 64 --hidden-size 32 --model gru --name Headlines_Exp3_RnOutFalse_Em64_Hid32_ModGRU > Headlines_Exp3_RnOutFalse_Em64_Hid32_ModGRU_Result.txt
+python %simple_rnn.py% --model parcnn --small-conv-size 1 --large-conv-size 3 --embed-size 32 --name Headlines_Exp4_Em32_Min1_Max3_ModParC > Headlines_Exp4_Em32_Min1_Max3_ModParC_Result.txt
+
+python %twitter.py% --embed-size 128 --name Twitter_Exp1_ModelNone_Em128 > Twitter_Exp1_ModelNone_Em128_Result.txt
+python %twitter.py% --use-rnn-output 1 --embed-size 64 --hidden-size 32 --model gru --name Twitter_Exp3_RnOutTrue_Em64_Hid32_ModGRU > Twitter_Exp3_RnOutTrue_Em64_Hid32_ModGRU_Result.txt
+python %twitter.py% --model parcnn --small-conv-size 1 --large-conv-size 4 --embed-size 64 --name Twitter_Exp4_Em64_Min1_Max4_ModParC > Twitter_Exp4_Em64_Min1_Max4_ModParC_Result.txt
+
+
+
+
+
+
 
 
 #First Set of Experiments with no additional model

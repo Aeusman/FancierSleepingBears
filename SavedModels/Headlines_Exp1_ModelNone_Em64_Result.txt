@@ -1,0 +1,48 @@
+Load processed data
+Build dataset
+Create corpus dataset
+Create training and testing splits
+ParCNNModel(
+  (embed): Embedding(25000, 64)
+  (conv): ModuleList(
+    (0): Conv1d(64, 64, kernel_size=(1,), stride=(1,))
+    (1): Conv1d(64, 64, kernel_size=(2,), stride=(1,), padding=(1,))
+    (2): Conv1d(64, 64, kernel_size=(3,), stride=(1,), padding=(1,))
+  )
+  (dropout): Dropout(p=0)
+  (output): Linear(in_features=192, out_features=4, bias=True)
+)
+Epoch: 0 - validation test results - Average val_loss: 0.2675, val_acc: 76895/84482.0 (91.02%)
+Epoch: 1 - validation test results - Average val_loss: 0.2123, val_acc: 78720/84482.0 (93.18%)
+Epoch: 2 - validation test results - Average val_loss: 0.2460, val_acc: 78701/84482.0 (93.16%)
+Epoch: 3 - validation test results - Average val_loss: 0.3050, val_acc: 78476/84482.0 (92.89%)
+Epoch: 4 - validation test results - Average val_loss: 0.3970, val_acc: 78021/84482.0 (92.35%)
+Epoch: 5 - validation test results - Average val_loss: 0.4121, val_acc: 78210/84482.0 (92.58%)
+Epoch: 6 - validation test results - Average val_loss: 0.4332, val_acc: 78710/84482.0 (93.17%)
+Epoch: 7 - validation test results - Average val_loss: 0.4375, val_acc: 78823/84482.0 (93.30%)
+Epoch: 8 - validation test results - Average val_loss: 0.5709, val_acc: 78538/84482.0 (92.96%)
+Epoch: 9 - validation test results - Average val_loss: 0.6111, val_acc: 78391/84482.0 (92.79%)
+
+epoch,acc,loss,val_acc,val_loss
+
+0,0.901620764248076,0.280644879325953,0.91019386,0.26753610343898787
+
+1,0.9466127299683068,0.1588795194818491,0.93179613,0.2123158651247036
+
+2,0.9558987591994721,0.13139958307247412,0.93157125,0.24596190468943996
+
+3,0.9610507594835571,0.1173742871864926,0.92890793,0.30500520006312876
+
+4,0.965575405339023,0.10551356353787761,0.9235222,0.3969994330479
+
+5,0.9670490964024775,0.10521017509343834,0.9257593,0.41208225369992457
+
+6,0.9707155687470963,0.09205906842906807,0.93167776,0.4332144651044733
+
+7,0.9738316263571718,0.08154701284172758,0.93301535,0.4374662534054001
+
+8,0.9753082766396293,0.07859128365833037,0.92964184,0.5709108552038465
+
+9,0.9763114518816194,0.07828147782026308,0.9279018,0.6111143768766422
+
+

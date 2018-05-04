@@ -118,6 +118,7 @@ max_pool_kernel_size = args.conv_size
 dropout = args.dropout
 small_conv_size = args.small_conv_size
 large_conv_size = args.large_conv_size + 1
+name = args.name
 
 random.seed(args.seed)
 torch.manual_seed(args.seed)
@@ -645,6 +646,7 @@ callbacklist.on_train_begin()
 for epoch in range(epochs):
     callbacklist.on_epoch_begin(epoch)
     total_minibatch_count = train(tensorboard_writer, callbacklist,total_minibatch_count)
+    torch.save(model.state_dict(), name + '_Epoch{}.pt'.format(epoch))
     test_fn(tensorboard_writer, callbacklist, total_minibatch_count,epoch)
 callbacklist.on_train_end()
 tensorboard_writer.close()
